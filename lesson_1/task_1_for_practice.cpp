@@ -1,4 +1,19 @@
 #include <iostream>
+// func to set array manually
+void ManualDataInitialization(int** arr, int row, int col);
+
+// func to set array randomly
+void RandomDataInitialization(int** arr, int row, int col);
+
+// func to print array to console
+void OutputArrayToConsole(int** arr, int row, int col);
+
+// func to compare sets of items in two columns
+bool IsAllItemsInColumnDifferent(int** arr, int row, int col_number);
+
+// func to count how many columns with different items sets
+int NumberOfColumnsWithDifferentItems(int** arr, int row, int col);
+
 
 void ManualDataInitialization(int** arr, int row, int col) {
     for (int i = 0; i < row; i++) {
@@ -16,6 +31,16 @@ void RandomDataInitialization(int** arr, int row, int col) {
         }
     }
 }
+
+void OutputArrayToConsole(int** arr, int row, int col) {
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            std::cout << arr[i][j] << ' ';
+        }
+        std::cout << std::endl;
+    }
+}
+
 
 bool IsAllItemsInColumnDifferent(int** arr, int row, int col_number) {
     for (int i = 0; i < row; i++) {
@@ -36,15 +61,6 @@ int NumberOfColumnsWithDifferentItems(int** arr, int row, int col) {
         }
     }
     return numberOfColumns;
-}
-
-void OutputArrayToConsole(int** arr, int row, int col) {
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            std::cout << arr[i][j] << ' ';
-        }
-        std::cout << std::endl;
-    }
 }
 
 int main() {

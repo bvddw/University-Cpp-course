@@ -1,5 +1,27 @@
 #include <iostream>
 
+// func to set array manually
+void ManualDataInitialization(int** arr, int size);
+
+// func to set array randomly
+void RandomDataInitialization(int** arr, int size);
+
+//func to print entire array to console
+void DefaultPrint(int** arr, int size);
+
+// func to print top left triangle
+void PrintTopLeftTriangle(int** arr, int size);
+
+// func to print bottom left triangle
+void PrintBottomLeftTriangle(int** arr, int size);
+
+// func to print top right triangle
+void PrintTopRightTriangle(int** arr, int size);
+
+// func to print bottom right triangle
+void PrintBottomRightTriangle(int** arr, int size);
+
+
 void ManualDataInitialization(int** arr, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {

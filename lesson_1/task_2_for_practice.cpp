@@ -1,5 +1,20 @@
 #include <iostream>
 // func to manual initialization
+void ManualDataInitialization(int** arr, int row, int col);
+
+// func to automatic (random) initialization
+void RandomDataInitialization(int** arr, int row, int col);
+
+// func to output
+void OutputArrayToConsole(int** arr, int row, int col);
+
+// func to check is to sets are similar
+bool IsSimilar(int** arr, int* first_row_items, int set_size, int row_number, int size);
+
+// func to print similar rows to first row to console 
+void SimilarRowsToConsole (int** arr, int row, int col);
+
+
 void ManualDataInitialization(int** arr, int row, int col) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
@@ -8,7 +23,7 @@ void ManualDataInitialization(int** arr, int row, int col) {
         }
     }
 }
-// func to automatic (random) initialization
+
 void RandomDataInitialization(int** arr, int row, int col) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
@@ -16,7 +31,7 @@ void RandomDataInitialization(int** arr, int row, int col) {
         }
     }
 }
-// func to output
+
 void OutputArrayToConsole(int** arr, int row, int col) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
@@ -25,7 +40,6 @@ void OutputArrayToConsole(int** arr, int row, int col) {
         std::cout << std::endl;
     }
 }
-
 
 bool IsSimilar(int** arr, int* first_row_items, int set_size, int row_number, int size) {
     int* cur_row = new int[size];
