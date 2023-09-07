@@ -1,4 +1,10 @@
 #include <iostream>
+
+/*
+Знайти і вивести строчки, які схожі на першу строку матриці.
+Строки схожі - коли в них повністю співпадають множини елементів, з яких кожна з них складається.
+*/
+
 // func to manual initialization
 void ManualDataInitialization(int** arr, int row, int col);
 

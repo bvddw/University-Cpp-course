@@ -1,4 +1,9 @@
 #include <iostream>
+
+/*
+Порахувати кількість стовпців матриці, у яких усі елементи різні.
+*/
+
 // func to set array manually
 void ManualDataInitialization(int** arr, int row, int col);
 

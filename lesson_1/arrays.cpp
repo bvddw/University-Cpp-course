@@ -1,5 +1,9 @@
 #include <iostream>
 
+/*
+Вивести послідовно у консоль усі 4 трикунтники (відносно діагоналей матриці).
+*/
+
 // func to set array manually
 void ManualDataInitialization(int** arr, int size);
 
