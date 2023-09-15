@@ -9,67 +9,75 @@ struct Person {
     float mark;
 };
 
-
 // function for processing such data (+++, ++-, +--, ---)
-void person_data(const char* lastname = "Ivanov", int year = 1, float mark = 4.0) {
-    cout << "Last Name: " << lastname << endl;
-    cout << "Year of enrollment: " << year << endl;
-    cout << "Average Mark: " << mark << endl;
-    cout << endl;
+Person person_data(const char* lastname = "Ivanov", int year = 1, float mark = 4.0) {
+    Person new_person;
+    new_person.name = lastname;
+    new_person.year = year;
+    new_person.mark = mark;
+    return new_person;
 }
 
 // function for processing such data (-++, -+-)
-void person_data(int year, float mark = 4.0) {
-    const char* lastname = "Ivanov";
-    cout << "Last Name: " << lastname << endl;
-    cout << "Year of enrollment: " << year << endl;
-    cout << "Average Mark: " << mark << endl;
-    cout << endl;
+Person person_data(int year, float mark = 4.0) {
+    Person new_person;
+    new_person.name = "Ivanov";
+    new_person.year = year;
+    new_person.mark = mark;
+    return new_person;
 }
 // function for processing such data (--+)
-void person_data(float mark) {
-    const char* lastname = "Ivanov";
-    int year = 1;
-    cout << "Last Name: " << lastname << endl;
-    cout << "Year of enrollment: " << year << endl;
-    cout << "Average Mark: " << mark << endl;
-    cout << endl;
+Person person_data(float mark) {
+    Person new_person;
+    new_person.name = "Ivanov";
+    new_person.year = 1;
+    new_person.mark = mark;
+    return new_person;
 }
 // function for processing such data (+-+)
-void person_data(const char* lastname, float mark) {
-    int year = 1;
-    cout << "Last Name: " << lastname << endl;
-    cout << "Year of enrollment: " << year << endl;
-    cout << "Average Mark: " << mark << endl;
-    cout << endl;
+Person person_data(const char* lastname, float mark) {
+    Person new_person;
+    new_person.name = lastname;
+    new_person.year = 1;
+    new_person.mark = mark;
+    return new_person;
 }
 
-void correct_calling(Person people) {
-    if (people.name) { // if there is name
-        if (people.year) { // if there is name and year
-            if (people.mark) { // if there is mark
-                person_data(people.name, people.year, people.mark); // +++
+Person initialization_free_fields(Person person) {
+    // loop for correct calling
+    if (person.name) { // if there is name
+        if (person.year) { // if there is name and year
+            if (person.mark) { // if there is mark
+                person = person_data(person.name, person.year, person.mark); // +++
             } else { // if there no mark
-                person_data(people.name, people.year); // ++-
+                person = person_data(person.name, person.year); // ++-
             }
-        } else if (people.mark) { // if there are name and mark but no year
-            person_data(people.name, people.mark); // +-+
+        } else if (person.mark) { // if there are name and mark but no year
+            person = person_data(person.name, person.mark); // +-+
         } else { // if there is name, but no mark and year
-            person_data(people.name); // +--
+            person = person_data(person.name); // +--
         }
     } else { // if there no name
-        if (people.year) { // if there no name but there is year
-            if (people.mark) { // if there are year and mark but no name
-                person_data(people.year, people.mark); // -++
+        if (person.year) { // if there no name but there is year
+            if (person.mark) { // if there are year and mark but no name
+                person = person_data(person.year, person.mark); // -++
             } else { // if there is year but no name and mark
-                person_data(people.year); // -+-
+                person = person_data(person.year); // -+-
             }
-        } else if (people.mark) { // if there is mark but no name and year 
-            person_data(people.mark); // --+
+        } else if (person.mark) { // if there is mark but no name and year 
+            person = person_data(person.mark); // --+
         } else { // if there no given data
-            person_data(); // ---
+            person = person_data(); // ---
         }
     }
+    return person;
+}
+
+void print_data(Person person) {
+    cout << endl;
+    cout << "Lastname: " << person.name << endl;
+    cout << "Year: " << person.year << endl;
+    cout << "Mark: " << person.mark << endl;
 }
 
 int main() {    
@@ -85,12 +93,15 @@ int main() {
         {nullptr, NULL, 4.7}
     };
 
-    // loop for correct calling
+    // loop in which we initialize free fields
     for (int i = 0; i < 8; i++) {
-        correct_calling(people[i]); // calling function for define in which fields we have data 
+        people[i] = initialization_free_fields(people[i]);
     }
-
+    
+    // printing data to console
+    for (int i = 0; i < 8; i++) {
+        print_data(people[i]);
+    }
 
     return 0;
 }
-
