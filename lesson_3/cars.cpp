@@ -47,6 +47,7 @@ class Car {
 class SportCar : public Car {
     public:
         int speed;
+        bool is_ready_to_race;
 
         SportCar(const char* make, const char* model, int year, double price, const char* engine, int speed)
         : Car(make, model, year, price, engine), speed(speed) {}
