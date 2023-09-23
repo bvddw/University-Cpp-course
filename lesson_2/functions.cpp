@@ -9,8 +9,15 @@ struct Person {
     float mark;
 };
 
+Person person_data(const char* lastname = "Ivanov", int year = 1, float mark = 4.0);
+Person person_data(int year, float mark = 4.0);
+Person person_data(float mark);
+Person person_data(const char* lastname, float mark);
+Person initialization_free_fields(Person person);
+void print_data(Person person);
+
 // function for processing such data (+++, ++-, +--, ---)
-Person person_data(const char* lastname = "Ivanov", int year = 1, float mark = 4.0) {
+Person person_data(const char* lastname, int year, float mark) {
     Person new_person;
     new_person.name = lastname;
     new_person.year = year;
@@ -19,7 +26,7 @@ Person person_data(const char* lastname = "Ivanov", int year = 1, float mark = 4
 }
 
 // function for processing such data (-++, -+-)
-Person person_data(int year, float mark = 4.0) {
+Person person_data(int year, float mark) {
     Person new_person;
     new_person.name = "Ivanov";
     new_person.year = year;
