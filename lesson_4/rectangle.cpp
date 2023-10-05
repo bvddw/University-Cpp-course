@@ -70,6 +70,12 @@ int main() {
     cout << "Area: " << r2.area() << ", Perimeter: " << r2.perimeter() << "\n";
     cout << endl;
 
+    Rectangle* rectPtr = &r1;
+    std::cout << "Using a pointer to base class for Rectangle 1:\n";
+    std::cout << "Length: " << rectPtr->getLength() << ", Width: " << rectPtr->getWidth() << "\n";
+    std::cout << "Area: " << rectPtr->area() << ", Perimeter: " << rectPtr->perimeter() << "\n\n";
+
+
     Rectangle rectangles[2] = {r1, r2};
     cout << "Array of Rectangles:\n";
     for (int i = 0; i < 2; ++i) {
