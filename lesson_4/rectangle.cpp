@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -8,8 +9,18 @@ public:
 
     Point(double x, double y) : x(x), y(y) {}
 
-    double getX() const { return x; }
-    double getY() const { return y; }
+    double getX() const { 
+        return x; 
+    }
+    double getY() const { 
+        return y; 
+    }
+    double setX(double newX) {
+        x = newX;
+    }
+    double setY(double newY) {
+        y = newY;
+    }
 
 private:
     double x;
@@ -44,6 +55,10 @@ public:
         return 2 * (this->length + this->width); 
     }
 
+    void print() {
+        cout << "Rectange with:\n \tlength = " << this->length << "\n\twidth = " << this->width << endl;
+    }
+
 protected:
     double length;
     double width;
@@ -70,15 +85,19 @@ public:
     }
 
     void setBottomLeft(const Point& intput_bottomLeft) {
-        this->bottomLeft = intput_bottomLeft; 
-        this->length = (bottomLeft.getX() - bottomLeft.getY() > 0) ? (bottomLeft.getX() - bottomLeft.getY()) : (bottomLeft.getY() - bottomLeft.getX());
-        this->width = (topRight.getX() - topRight.getY() > 0) ? (topRight.getX() - topRight.getY()) : (topRight.getY() - topRight.getX());
+        this->bottomLeft = intput_bottomLeft;
+        this->topLeft.setX(intput_bottomLeft.getX());
+        this->bottomRight.setY(intput_bottomLeft.getY());
+        this->length = abs(bottomLeft.getY() - topLeft.getY());
+        this->width = abs(bottomLeft.getX() - bottomRight.getX());
     }
 
     void setTopRight(const Point& input_topRight) { 
         this->topRight = input_topRight;
-        this->length = (bottomLeft.getX() - bottomLeft.getY() > 0) ? (bottomLeft.getX() - bottomLeft.getY()) : (bottomLeft.getY() - bottomLeft.getX());
-        this->width = (topRight.getX() - topRight.getY() > 0) ? (topRight.getX() - topRight.getY()) : (topRight.getY() - topRight.getX());
+        this->topLeft.setY(input_topRight.getY());
+        this->bottomRight.setX(input_topRight.getX());
+        this->length = abs(bottomLeft.getY() - topLeft.getY());
+        this->width = abs(bottomLeft.getX() - bottomRight.getX());
     }
 
     double area() const { 
@@ -101,8 +120,16 @@ public:
         return this->topRight; 
     }
 
-    Point getBottomRight() const { 
-        return this->bottomRight; 
+    Point getBottomRight() const {
+        return this->bottomRight;
+    }
+
+    void print() const {
+        cout << "Rectange with:\n \tlength = " << this->length << "\n\twidth = " << this->width << "\nCoordinates:\n";
+        cout << "\tBottom left: (" << this->bottomLeft.getX() << ", " << this->bottomLeft.getY() << ")\n";
+        cout << "\tTop left: (" << this->topLeft.getX() << ", " << this->topLeft.getY() << ")\n";
+        cout << "\tTop right: (" << this->topRight.getX() << ", " << this->topRight.getY() << ")\n";
+        cout << "\tBottom right: (" << this->bottomRight.getX() << ", " << this->bottomRight.getY() << ")\n";
     }
 
 private:
@@ -115,43 +142,38 @@ private:
 int main() {
     Rectangle r1(4.0, 5.0);
     cout << "Rectangle 1:\n";
-    cout << "Length: " << r1.getLength() << ", Width: " << r1.getWidth() << "\n";
-    cout << "Area: " << r1.area() << ", Perimeter: " << r1.perimeter() << "\n";
+    r1.print();
+    cout << "\tArea: " << r1.area() << ", Perimeter: " << r1.perimeter() << "\n";
     cout << endl;
 
     Point bottomLeft(1.0, 2.0);
     Point topRight(5.0, 6.0);
 
     CoordinateRectangle r2(bottomLeft, topRight);
-    cout << "Rectangle 2:\n";
-    cout << "Length: " << r2.getLength() << ", Width: " << r2.getWidth() << endl;
-    cout << "Area: " << r2.area() << ", Perimeter: " << r2.perimeter() << endl;
-    cout << "Left Bottom point: " << r2.getBottomLeft().getX() << ' ' << r2.getBottomLeft().getY() << endl;
-    cout << "Left Top point: " << r2.getTopLeft().getX() << ' ' << r2.getTopLeft().getY() << endl;
-    cout << "Right Top point: " << r2.getTopRight().getX() << ' ' << r2.getTopRight().getY() << endl;
-    cout << "Rgiht Bottom point: " << r2.getBottomRight().getX() << ' ' << r2.getBottomRight().getY() << endl;
+    cout << "\nRectangle 2:\n";
+    r2.print();
+    cout << "\tArea: " << r2.area() << ", Perimeter: " << r2.perimeter() << endl;
 
     Point newBottomLeft(0.0, 0.0);
     Point newTopRight(8.0, 4.0);
     r2.setBottomLeft(newBottomLeft);
     r2.setTopRight(newTopRight);
 
-    std::cout << "Updated Rectangle 2:\n";
-    std::cout << "Length: " << r2.getLength() << ", Width: " << r2.getWidth() << "\n";
-    std::cout << "Area: " << r2.area() << ", Perimeter: " << r2.perimeter() << "\n";
+    std::cout << "\nUpdated Rectangle 2:\n";
+    r2.print();
+    std::cout << "\tArea: " << r2.area() << ", Perimeter: " << r2.perimeter() << "\n";
 
     Rectangle* rectPtr = &r1;
-    std::cout << "Using a pointer to base class for Rectangle 1:\n";
-    std::cout << "Length: " << rectPtr->getLength() << ", Width: " << rectPtr->getWidth() << "\n";
+    std::cout << "\nUsing a pointer to base class for Rectangle 1:\n";
+    r1.print();
     std::cout << "Area: " << rectPtr->area() << ", Perimeter: " << rectPtr->perimeter() << "\n\n";
 
 
     Rectangle rectangles[2] = {r1, r2};
     cout << "Array of Rectangles:\n";
     for (int i = 0; i < 2; ++i) {
-        cout << "Rectangle " << i + 1 << ":\n";
-        cout << "Length: " << rectangles[i].getLength() << ", Width: " << rectangles[i].getWidth() << "\n";
-        cout << "Area: " << rectangles[i].area() << ", Perimeter: " << rectangles[i].perimeter() << "\n\n";
+        rectangles[i].print();
+        cout << "\tArea: " << rectangles[i].area() << ", Perimeter: " << rectangles[i].perimeter() << "\n\n";
     }
 
     return 0;

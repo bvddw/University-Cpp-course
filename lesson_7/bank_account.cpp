@@ -4,19 +4,24 @@ class BankAccount {
 private:
     double balance;
     static double annualInterestRate;
+    static double totalBalance;
     int accountNumber;
     BankAccount* next;
 
 public:
-    BankAccount(int numberOfAccount, double initialBalance = 0.0) : balance(initialBalance), accountNumber(numberOfAccount) ,next(nullptr) {}
+    BankAccount(int numberOfAccount = 0, double initialBalance = 0.0) : balance(initialBalance), accountNumber(numberOfAccount) ,next(nullptr) {
+        totalBalance += initialBalance;
+    }
 
     void deposit(double amount) {
         balance += amount;
+        totalBalance += amount;
     }
 
     void withdraw(double amount) {
         if (balance >= amount) {
             balance -= amount;
+            totalBalance -= amount;
         } else {
             std::cout << "Insufficient funds in the account." << std::endl;
         }
@@ -27,7 +32,9 @@ public:
     }
 
     void addInterest() {
-        balance += balance * (annualInterestRate / 100.0);
+        double sumToBeAdded = balance * (annualInterestRate / 100.0);
+        balance += sumToBeAdded;
+        totalBalance += sumToBeAdded;
     }
 
     static void setAnnualInterestRate(double rate) {
@@ -50,12 +57,21 @@ public:
         next = nextAccount;
     }
 
+    double getTotalBalance() const {
+        return totalBalance;
+    }
+
+    void withdrawFromTotalBalance(double money) {
+        totalBalance -= money;
+    }
+
     BankAccount* getNext() {
         return next;
     }
 };
 
 double BankAccount::annualInterestRate = 0.0;
+double BankAccount::totalBalance = 0.0;
 
 class AccountList {
 private:
@@ -105,6 +121,7 @@ public:
                     previous->setNext(current->getNext());
                 }
                 previous = current;
+                current->withdrawFromTotalBalance(current->getBalance());
                 current = current->getNext();
                 while (current != nullptr) {
                     current->setAccountNumber(current->getAccountNumber() - 1);
@@ -126,10 +143,9 @@ public:
 
     void displayAccountBalances() {
         BankAccount* current = head;
-        double totalBalance = 0.0;
+        double totalBalance = current->getTotalBalance();
         while (current != nullptr) {
             std::cout << "Account " << current->getAccountNumber() << ": Balance $" << current->getBalance() << std::endl;
-            totalBalance += current->getBalance();
             current = current->getNext();
         }
         std::cout << "Total Balance: $" << totalBalance << std::endl;
