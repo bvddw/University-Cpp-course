@@ -87,7 +87,7 @@ Vector* sumOfVectors(const Vector* v1, const Vector* v2) {
 double scalarProduct(const Vector* v1, const Vector* v2) {
     double product = 0;
     if (v1->getDimension() != v2->getDimension()) {
-        return;
+        return  NULL;
     }
     for (int i = 0; i < v1->getDimension(); i++) {
         product += v1->getElement(i) + v2->getElement(i);
@@ -100,6 +100,13 @@ double vectorLength(const Vector* v) {
 }
 
 int main() {
+    Vector v0(3);
+    
+    v0.setElement(0, 1.0);
+    v0.setElement(1, 2.0);
+    v0.setElement(2, 3.0);
+    v0.print();
+
     Vector* v1 = new Vector(3);
     
     v1->setElement(0, 1.0);
