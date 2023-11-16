@@ -1,0 +1,2 @@
+1~title1~author1~2000~publisher1~english~12~0
+2~tItle2~authOr2~2023~publIsher2~ukrainian~15~0

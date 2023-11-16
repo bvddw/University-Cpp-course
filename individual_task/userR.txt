@@ -1,0 +1,2 @@
+Book: title1, Price: 12
+Book: title2, Price: 13
