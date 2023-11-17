@@ -95,6 +95,10 @@ void Book::setPrice(float _price) {
     }
 }
 
+void Book::incrementNumberOfBuying() {
+    numberOfBuying++;
+}
+
 AbstractUser::AbstractUser(char *login, char *password, float funds, float spentConsts): login(login), password(password) {
     numberOfUsers++;
     this->funds = funds;
@@ -172,7 +176,7 @@ bool AbstractUser::transaction(Book* book) {
     newBooks[numberOfBooks] = book;
     numberOfBooks++;
     books = newBooks;
-
+    book->incrementNumberOfBuying();
     return true;
 }
 
@@ -701,4 +705,16 @@ bool Library::createSuperUser(char *login, char *password) {
     NumberOfUsers++;
     users = newUsers;
     return true;
+}
+
+Library::~Library() {
+    for (int i = 0; i < NumberOfBooks; ++i) {
+        delete books[i];
+    }
+    delete[] books;
+
+    for (int i = 0; i < NumberOfUsers; ++i) {
+        delete users[i];
+    }
+    delete[] users;
 }

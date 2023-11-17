@@ -173,6 +173,7 @@ int main() {
                     library->saveBooks();
                     library->saveUsers();
                     library->saveSuperUsers();
+                    cout << "Program finished successfully!" << endl;
                     break;
                 default:
                     cout << "Invalid choice!" << endl;

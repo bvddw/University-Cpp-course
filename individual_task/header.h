@@ -33,6 +33,7 @@ public:
     void setPublisher(char* _publisher);
     void setLanguage(char* _language);
     void setPrice(float _price);
+    void incrementNumberOfBuying();
 };
 
 class AbstractUser {
