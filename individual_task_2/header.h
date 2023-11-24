@@ -105,6 +105,7 @@ public:
     vector<Order> orders;
 
     void displayAvailableProducts(); // виводить усі наявня товари
+    void displayProductWithFiltres(string* filtres); // вивід товарів з фільтрами
     User& loginUser(const string& username, const string& password); // зайти у сайт під цим користувачем
     bool registerUser(const string& username, const string& password); // зареєструватись
     bool logoutUser(User& user); // вийти з сайту
