@@ -76,49 +76,6 @@ public:
         return true;
     }
 
-    // Оператор додавання
-    Vector operator+(const Vector& other) const {
-        Vector result;
-        for (int i = 0; i < Size; ++i) {
-            result.elements[i] = elements[i] + other.elements[i];
-        }
-        return result;
-    }
-
-    // Оператор віднімання
-    Vector operator-(const Vector& other) const {
-        Vector result;
-        for (int i = 0; i < Size; ++i) {
-            result.elements[i] = elements[i] - other.elements[i];
-        }
-        return result;
-    }
-
-    // Оператор множення на скаляр
-    Vector operator*(const T& scalar) const {
-        Vector result;
-        for (int i = 0; i < Size; ++i) {
-            result.elements[i] = elements[i] * scalar;
-        }
-        return result;
-    }
-
-    // Оператор додавання з присвоєнням
-    Vector& operator+=(const Vector& other) {
-        for (int i = 0; i < Size; ++i) {
-            elements[i] += other.elements[i];
-        }
-        return *this;
-    }
-
-    // Оператор віднімання з присвоєнням
-    Vector& operator-=(const Vector& other) {
-        for (int i = 0; i < Size; ++i) {
-            elements[i] -= other.elements[i];
-        }
-        return *this;
-    }
-
     // Вивід вектора
     friend ostream& operator<<(ostream& os, const Vector& vec) {
         os << "(";
