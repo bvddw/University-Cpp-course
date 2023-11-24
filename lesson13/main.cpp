@@ -15,7 +15,7 @@ int main() {
         LongNumber result1 = num1 + num2;
         cout << "Sum: " << result1 << endl;
 
-        LongNumber result2 = num1 - num2;
+        LongNumber result2 = num2 - num1;
         cout << "Difference: " << result2 << endl;
 
         LongNumber result3 = num1 * num2;
